@@ -7,7 +7,13 @@ const data = async (props = {}) => {
     email: faker.internet.email(),
     password: faker.internet.password(),
   };
-  return { ...defaultProps, props };
+  return { ...defaultProps, ...props };
 };
 
-module.exports = async (props = {}) => User.create(await data(props));
+module.exports = async (props = {}) => {
+  const userData = await data(props);
+  const user = new User(userData);
+  user.setPassword(userData.password);
+  await user.save();
+  return user;
+}

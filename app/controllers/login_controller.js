@@ -5,10 +5,10 @@ const { ErrorHandler } = require('../helpers/error');
 const LoginController = {
   login: async (req, res) => {
     const user = await User.findOne({
-      where: { email: req.body.email, password: req.body.password },
+      where: { email: req.body.email },
     });
 
-    if (!user) throw new ErrorHandler(401, 'authentication.problem');
+    if (!user || !user.validPassword(req.body.password)) throw new ErrorHandler(401, 'authentication.problem');
 
     const token = generateTokenJWT(user);
     res.json({ token });

@@ -23,14 +23,13 @@ const UserController = {
 
   create: async (req, res) => {
     const user = await UserService.create(req.body);
-    res.json(user);
+    res.status(201).json(user);
   },
 
   update: async (req, res) => {
     const { id } = req.params;
-    const user = await UserService.findById(id);
+    const user = await UserService.update(id, req.body);
 
-    user.update(req.body);
     res.json(user);
   },
 };

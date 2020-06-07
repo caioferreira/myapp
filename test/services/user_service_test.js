@@ -1,8 +1,8 @@
 const { userFactory } = require('../factories');
 const chai = require('chai');
-const should = chai.should()
-const assert = chai.assert
-const UserService = require('../../app/services/user_service')
+const should = chai.should();
+const assert = chai.assert;
+const UserService = require('../../app/services/user_service');
 
 describe('UserService', () => {
 

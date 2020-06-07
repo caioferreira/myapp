@@ -9,9 +9,19 @@ const UserService = {
     return user;
   },
 
-  create: (params) => User.create(params),
+  create: async (params) => {
+    const user = new User(params);
+    user.setPassword(params.password);
+    await user.save();
+    return user;
+  },
 
   findAll: () => User.findAll(),
+
+  update: async (id, params) => {
+    await User.update(params, { where: { id } });
+    return UserService.findById(id);
+  },
 };
 
 module.exports = UserService;

@@ -1,3 +1,8 @@
 const userFactory = require('./user_factory');
+const { generateTokenJWT } = require('../../app/auth');
 
-module.exports = { userFactory };
+const login = (user) => {
+  return `Bearer ${generateTokenJWT(user)}`
+};  
+
+module.exports = { userFactory, login };
