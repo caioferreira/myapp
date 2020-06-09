@@ -9,6 +9,11 @@ const UserService = {
     return user;
   },
 
+  findByEmail: async (email) => {
+    const user = await User.findOne({ where: { email } });
+    return user;
+  },
+
   create: async (params) => {
     const user = new User(params);
     user.setPassword(params.password);
